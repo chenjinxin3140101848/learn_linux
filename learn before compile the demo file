@@ -1,0 +1,36 @@
+如何运行APUE中的代码？
+APUE中的代码不是download下来就可以直接编译执行的。由于头文件的问题，需要做相关的设置，修改一下相关的文件。
+
+首先从http://www.apuebook.com/src.tar.gz下载源码压缩包，解压到相应目录，例如：
+
+mkdir /home/Rockics/src
+
+cd /home/Rockics/src/
+
+wget http://www.apuebook.com/src.tar.gz
+
+tar zxvf src.tar.gz
+
+解压以后得到文件夹apue.2e。按照以下步骤完成设置，则可以编译相关代码：
+
+1.进入相应目录：cd apue.2e；
+
+2.修改文件Make.defines.linux:将其中的WKDIR 修改为/home/Rockics/src/apue.2e，保存退出；
+
+3.修改文件std/linux.mk:将其中的nawk全部修改为wak，可在vi下使用命令：%s/nawk/awk/g完成；
+
+4.修改文件include/apue.h:在文件倒数第二行（也就是#endif之前）加入：#include "error.c"; 这一行；
+
+5.切换到root账户，将include/apue.h还有lib/error.c拷贝一份到/usr/include/下
+
+设置完毕：）
+
+测试：
+
+我运行APUE的第一个程序实验一下环境是否OK：
+
+APUE的第一个程序是myls.c，文件位于file/ls1.c，试试看其是否编译通过哈：
+
+[Rockics@localhost apue.2e]$ gcc -o myls -Wall file/ls1.c
+
+很好，没有任何警告，设置成功。
