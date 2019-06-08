@@ -25,6 +25,7 @@ int main(void)
     /*signal SIGCHLD is not blocked,the signal send to the process brfore the function return*/
     iret = kill(pid, SIGCHLD);
     printf("call kill return value iret = %d.\n",iret);
+    
     return 0;
 }
 /*
